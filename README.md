@@ -1,27 +1,29 @@
 # Angularimage
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.1.
+#Creer un projet angular nommé angularimage avec la commande:
 
-## Development server
+ ng new angularimage
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# On crée un nouveau dossier appelé dist/angularimage dans lequel 
+les fichiers compilés sont placé:
 
-## Code scaffolding
+ng build 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#Créer un fichier Dockerfile dans la racine du projet
+-premier à obtenir uneimage Docker nginx de Docker Hubétiquetée 
+avec alpine (c’est comme un numéro de version),
+-et enfin copier-coller l’application compilée
+(nous l’avons fait à l’étape précédente) dans le conteneur.
 
-## Build
+FROM nginx:alpine
+COPY /dist/angularimage /usr/share/nginx/html
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Créer l' image nommée imageanguler:
 
-## Running unit tests
+docker build -t imageanguler
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Executerr l' image nommée imageanguler:
 
-## Running end-to-end tests
+docker run --name container_angular -d -p 8080:80 imageanguler
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+C'est OK
